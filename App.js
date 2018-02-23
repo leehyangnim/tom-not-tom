@@ -139,15 +139,14 @@ export default class CameraExample extends React.Component {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'multipart/form-data;',
                 },
                 body: data
             }
             console.log('config:', config);
             fetch(api, config)
                 .then((res) => {
-                    console.log('res:', res);
-                    this.setState({ status: res });
+                    console.log('res:', res._bodyText);
+                    this.setState({ status: res._bodyText });
                 })
                 .catch(err => {
                     console.log('err:', err);
