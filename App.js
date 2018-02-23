@@ -43,6 +43,22 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 10,
     },
+    statusView: {
+        position: 'absolute',
+        bottom: 32,
+        width: 160,
+        height: 24,
+        paddingLeft: 8,
+        paddingRight: 8,
+        backgroundColor: 'black',
+    },
+    statusText: {
+        fontSize: 13,
+        fontWeight: 'bold',
+        lineHeight: 24,
+        textAlign: 'center',
+        color: 'white',
+    },
     actionView: {
         flex: 0,
         width: '100%',
@@ -107,6 +123,9 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.cameraView}>
                         <Camera style={styles.camera} type={this.state.type} />
+                        <View style={styles.statusView}>
+                            <Text style={styles.statusText}>Searching...</Text>
+                        </View>
                     </View>
                     <View style={styles.actionView}>
                         <TouchableOpacity style={styles.button} onPress={() => {console.log('--- TOM IS JARED! ---');}}>
