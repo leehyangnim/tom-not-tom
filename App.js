@@ -124,7 +124,7 @@ export default class CameraExample extends React.Component {
                     <View style={styles.cameraView}>
                         <Camera style={styles.camera} type={this.state.type} />
                         <View style={styles.statusView}>
-                            <Text style={styles.statusText}>Searching...</Text>
+                            <Text style={styles.statusText}>Look at your camera</Text>
                         </View>
                     </View>
                     <View style={styles.actionView}>
