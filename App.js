@@ -78,6 +78,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
     },
+    statusImage: {
+      position: 'absolute',
+      bottom: 150
+    },
     actionView: {
         flex: 0,
         width: '100%',
@@ -182,8 +186,8 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.cameraView}>
                         <Camera ref={ref => { this.camera = ref; }} style={styles.camera} type={this.state.type} />
-                        { this.state.status === 'scanning' && <Image style={{}} source={require('./assets/checked.png')}/> }
-                        { this.state.status === 'not-tom' && <Image style={styles.buttonImage} source={require('./assets/cancel.png')}/> }
+                        { this.state.status === 'tom' && <Image style={styles.statusImage} source={require('./assets/checked.png')}/> }
+                        { this.state.status === 'nottom' && <Image style={styles.statusImage} source={require('./assets/cancel.png')}/> }
                         <View style={styles[this.state.messageStyle]}>
                             <Text style={styles.statusText}>{this.state.message}</Text>
                         </View>
