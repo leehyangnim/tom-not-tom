@@ -107,7 +107,7 @@ export default class CameraExample extends React.Component {
         this.setState({ hasCameraPermission: status === 'granted' });
     }
 
-    _saveToCameraRollAsync = async () => {
+    _takePictureAsync = async () => {
       let result =  await this.camera.takePictureAsync();
       console.log('===============================');
       console.log(result);
@@ -137,7 +137,7 @@ export default class CameraExample extends React.Component {
                         </View>
                     </View>
                     <View style={styles.actionView}>
-                        <TouchableOpacity style={styles.button} onPress={this._saveToCameraRollAsync}>
+                        <TouchableOpacity style={styles.button} onPress={this._takePictureAsync}>
                             <Image style={styles.buttonImage} source={require('./assets/lock.png')}/>
                         </TouchableOpacity>
                         <Text style={styles.buttonText}>
