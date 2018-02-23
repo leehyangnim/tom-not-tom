@@ -1,65 +1,123 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
+const styles = StyleSheet.create({
+    mainView: {
+        flex: 1,
+        justifyContent: 'space-between',
+        backgroundColor: '#2C3E50'
+    },
+    headerView: {
+        flex: 0,
+        flexDirection: 'row',
+        width: '100%',
+        height: 88,
+        justifyContent: 'center',
+        backgroundColor: '#222F3D',
+    },
+    headerText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        lineHeight: 52,
+        marginTop: 36,
+        color: 'white',
+    },
+    cameraView: {
+        flex: 1,
+        width: '100%',
+        height: '69.21%',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingTop: 24,
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 24,
+    },
+    camera: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 5,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+    },
+    actionView: {
+        flex: 0,
+        width: '100%',
+        height: 130,
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    button: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: 'white',
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+    },
+    buttonImage: {
+        height: 24,
+        top: '50%',
+        left: '50%',
+        transform: [
+            {translateX : -9},
+            {translateY : -12}
+        ],
+    },
+    buttonText: {
+        width: '100%',
+        fontSize: 11,
+        marginTop: 12,
+        lineHeight: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'white'
+    },
+});
+
 export default class CameraExample extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.front,
-  };
+    state = {
+        hasCameraPermission: null,
+        type: Camera.Constants.Type.front,
+    };
 
-  async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
-  }
-
-  render() {
-    const { hasCameraPermission } = this.state;
-    if (hasCameraPermission === null) {
-      return <View />;
-    } else if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
-    } else {
-      return (
-        <View style={{ flex: 1 }}>
-          <View style={{ backgroundColor: '#222F3D', width: '100%', height: '15%', alignItems: 'center'}}>
-            <Text style={{ lineHeight: 52, fontSize: 20, marginBottom: 30, fontWeight: 'bold', color: 'white' }}>
-              Tom, not Tom
-            </Text>
-          </View>
-          <View style={{ backgroundColor: '#2C3E50', width: '100%', height: '85%', alignItems: 'center', paddingTop: 24}}>
-            <Camera style={{ width: '90%', height: '80%' }} type={this.state.type}>
-              <View
-                style={{
-                  flex: 1,
-                  backgroundColor: 'transparent',
-                  flexDirection: 'row',
-                }}>
-              </View>
-            </Camera>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#fff',
-                marginTop: 12,
-                width: 48,
-                height: 48,
-                alignItems: 'center',
-                borderRadius: 24
-              }}
-              onPress={() => {
-                console.log('---');
-              }}>
-              {/* <Image
-                style={{ lineHeight: 48, fontWeight: 600, fontSize: 18, marginBottom: 10, color: '#E55880' }}
-                source={require('/.brain.svg')}/> */}
-            </TouchableOpacity>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 11, marginTop: 8, color: 'white' }}>
-              {' '}Press and hold{' '}
-            </Text>
-          </View>
-        </View>
-      );
+    async componentWillMount() {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted' });
     }
-  }
+
+    render() {
+        const { hasCameraPermission } = this.state;
+        if (hasCameraPermission === null) {
+            return <View />;
+        } else if (hasCameraPermission === false) {
+            return <Text>No access to camera</Text>;
+        } else {
+            return (
+                <View style={styles.mainView}>
+                    <View style={styles.headerView}>
+                        <Text style={styles.headerText}>
+                            Tom is Jared
+                        </Text>
+                    </View>
+                    <View style={styles.cameraView}>
+                        <Camera style={styles.camera} type={this.state.type} />
+                    </View>
+                    <View style={styles.actionView}>
+                        <TouchableOpacity style={styles.button} onPress={() => {console.log('--- TOM IS JARED! ---');}}>
+                            <Image style={styles.buttonImage} source={require('./assets/lock.png')}/>
+                        </TouchableOpacity>
+                        <Text style={styles.buttonText}>
+                            Tap to unlock
+                        </Text>
+                    </View>
+                </View>
+            );
+        }
+    }
 }
