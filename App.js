@@ -11,6 +11,10 @@ export default class CameraExample extends React.Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
+
+    const script = document.createElement("script");
+    // script.src = "https://cdn.jsdelivr.net/npm/deeplearn@latest";
+    // document.body.appendChild(script);
   }
 
   render() {
