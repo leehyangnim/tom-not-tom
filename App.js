@@ -147,6 +147,7 @@ export default class CameraExample extends React.Component {
             fetch(api, config)
                 .then((res) => {
                     console.log('res:', res);
+                    this.setState({ status: res });
                 })
                 .catch(err => {
                     console.log('err:', err);
