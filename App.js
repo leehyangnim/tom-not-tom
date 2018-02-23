@@ -143,16 +143,16 @@ export default class CameraExample extends React.Component {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'multipart/form-data;',
                 },
                 body: data
             }
+            this.setState({ message: 'Sending...'})
             // console.log('config:', config);
             fetch(api, config)
                 .then((res) => {
                     console.log('================================================');
-                    console.log('res:', res);
-                    this._changeStatus(res);
+                    console.log('res:', res._bodyText);
+                    this._changeStatus(res._bodyText);
                 })
                 .catch(err => {
                     console.log('err:', err);
@@ -176,9 +176,9 @@ export default class CameraExample extends React.Component {
           messageStyle: 'statusViewFail'
         });
       }
-      this.setTimeout( () => {
+      setTimeout( () => {
         this._setTimePassed();
-      },6000);
+      },3000);
     }
     
     _setTimePassed() {
@@ -211,7 +211,7 @@ export default class CameraExample extends React.Component {
                 <View style={styles.mainView}>
                     <View style={styles.headerView}>
                         <Text style={styles.headerText}>
-                            Tom is Jared
+                            Tom, Not Tom
                         </Text>
                     </View>
                     <View style={styles.cameraView}>
