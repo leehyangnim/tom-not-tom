@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions, takePictureAsync } from 'expo';
 
+const api = 'http://192.168.0.28:3030/upload';
 const styles = StyleSheet.create({
     mainView: {
         flex: 1,
@@ -107,10 +108,38 @@ export default class CameraExample extends React.Component {
         this.setState({ hasCameraPermission: status === 'granted' });
     }
 
+    _sendPicture = (path) => {
+        console.log('path:', path);
+        if (path) {
+            const data = new FormData();
+            data.append('picture', { uri: path, name: 'isthistom.jpg', type:'image/jpg' });
+            console.log('data:', data);
+            const config = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'multipart/form-data;',
+                },
+                body: data
+            }
+            console.log('config:', config);
+            fetch(api, config)
+                .then((res) => {
+                    console.log('res:', res);
+                })
+                .catch(err => {
+                    console.log('err:', err);
+                })
+        } else {
+            console.log('no image');
+        }
+    }
+
     _takePictureAsync = async () => {
       let result =  await this.camera.takePictureAsync();
-      console.log('===============================');
-      console.log(result);
+    //   console.log('===============================');
+    //   console.log(result);
+      this._sendPicture(result.uri);
       // let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
       // this.setState({ cameraRollUri: saveResult });
     };
