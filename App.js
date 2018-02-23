@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 10,
     },
-    statusView: {
+    statusViewDefault: {
         position: 'absolute',
         bottom: 32,
         width: 160,
@@ -52,6 +52,24 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         paddingRight: 8,
         backgroundColor: 'black',
+    },
+    statusViewSuccess: {
+        position: 'absolute',
+        bottom: 32,
+        width: 160,
+        height: 24,
+        paddingLeft: 8,
+        paddingRight: 8,
+        backgroundColor: '#4CD964',
+    },
+    statusViewFail: {
+        position: 'absolute',
+        bottom: 32,
+        width: 160,
+        height: 24,
+        paddingLeft: 8,
+        paddingRight: 8,
+        backgroundColor: '#FF3B30',
     },
     statusText: {
         fontSize: 13,
@@ -143,7 +161,7 @@ export default class CameraExample extends React.Component {
       // let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
       // this.setState({ cameraRollUri: saveResult });
     };
-  
+
 
     render() {
         const { hasCameraPermission } = this.state;
@@ -161,7 +179,7 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.cameraView}>
                         <Camera ref={ref => { this.camera = ref; }} style={styles.camera} type={this.state.type} />
-                        <View style={styles.statusView}>
+                        <View style={styles.statusViewDefault}>
                             <Text style={styles.statusText}>Look at your camera</Text>
                         </View>
                     </View>
