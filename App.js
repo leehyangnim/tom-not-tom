@@ -118,6 +118,9 @@ export default class CameraExample extends React.Component {
     state = {
         hasCameraPermission: null,
         type: Camera.Constants.Type.front,
+        status: 'scanning',
+        message: 'Look at your camera',
+        messageStyle: 'statusViewSuccess'
     };
 
     async componentWillMount() {
@@ -150,8 +153,10 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.cameraView}>
                         <Camera ref={ref => { this.camera = ref; }} style={styles.camera} type={this.state.type} />
-                        <View style={styles.statusViewDefault}>
-                            <Text style={styles.statusText}>Look at your camera</Text>
+                        { this.state.status === 'scanning' && <Image style={{}} source={require('./assets/checked.png')}/> }
+                        { this.state.status === 'not-tom' && <Image style={styles.buttonImage} source={require('./assets/cancel.png')}/> }
+                        <View style={styles[this.state.messageStyle]}>
+                            <Text style={styles.statusText}>{this.state.message}</Text>
                         </View>
                     </View>
                     <View style={styles.actionView}>
