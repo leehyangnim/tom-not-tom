@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, takePictureAsync } from 'expo';
 
 const styles = StyleSheet.create({
     mainView: {
@@ -107,6 +107,15 @@ export default class CameraExample extends React.Component {
         this.setState({ hasCameraPermission: status === 'granted' });
     }
 
+    _saveToCameraRollAsync = async () => {
+      let result =  await this.camera.takePictureAsync();
+      console.log('===============================');
+      console.log(result);
+      // let saveResult = await CameraRoll.saveToCameraRoll(result, 'photo');
+      // this.setState({ cameraRollUri: saveResult });
+    };
+  
+
     render() {
         const { hasCameraPermission } = this.state;
         if (hasCameraPermission === null) {
@@ -122,13 +131,13 @@ export default class CameraExample extends React.Component {
                         </Text>
                     </View>
                     <View style={styles.cameraView}>
-                        <Camera style={styles.camera} type={this.state.type} />
+                        <Camera ref={ref => { this.camera = ref; }} style={styles.camera} type={this.state.type} />
                         <View style={styles.statusView}>
                             <Text style={styles.statusText}>Searching...</Text>
                         </View>
                     </View>
                     <View style={styles.actionView}>
-                        <TouchableOpacity style={styles.button} onPress={() => {console.log('--- TOM IS JARED! ---');}}>
+                        <TouchableOpacity style={styles.button} onPress={this._saveToCameraRollAsync}>
                             <Image style={styles.buttonImage} source={require('./assets/lock.png')}/>
                         </TouchableOpacity>
                         <Text style={styles.buttonText}>
