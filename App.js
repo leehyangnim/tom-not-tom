@@ -21,39 +21,43 @@ export default class CameraExample extends React.Component {
       return <Text>No access to camera</Text>;
     } else {
       return (
-        <View style={{ backgroundColor: 'blue', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 18, marginTop: 10, marginBottom: 30, fontWeight: 'bold', color: 'white' }}>
-            Tom, not Tom
-          </Text>
-          <Camera style={{ width: '90%', height: '70%' }} type={this.state.type}>
-            <View
+        <View style={{ flex: 1 }}>
+          <View style={{ backgroundColor: '#222F3D', width: '100%', height: '15%', alignItems: 'center'}}>
+            <Text style={{ lineHeight: 52, fontSize: 20, marginBottom: 30, fontWeight: 'bold', color: 'white' }}>
+              Tom, not Tom
+            </Text>
+          </View>
+          <View style={{ backgroundColor: '#2C3E50', width: '100%', height: '85%', alignItems: 'center', paddingTop: 24}}>
+            <Camera style={{ width: '90%', height: '80%' }} type={this.state.type}>
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  flexDirection: 'row',
+                }}>
+              </View>
+            </Camera>
+            <TouchableOpacity
               style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                flexDirection: 'row',
+                backgroundColor: '#fff',
+                marginTop: 12,
+                width: 48,
+                height: 48,
+                alignItems: 'center',
+                borderRadius: 24
+              }}
+              onPress={() => {
+                console.log('---');
               }}>
-            </View>
-          </Camera>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#fff',
-              marginTop: 24,
-              width: 208,
-              height: 48,
-              alignItems: 'center',
-              borderRadius:10
-            }}
-            onPress={() => {
-              console.log('---');
-            }}>
-            {/* <Image
-              style={}
-              source={require('/.brain.svg')}/> */}
+              {/* <Image
+                style={{ lineHeight: 48, fontWeight: 600, fontSize: 18, marginBottom: 10, color: '#E55880' }}
+                source={require('/.brain.svg')}/> */}
+            </TouchableOpacity>
             <Text
-              style={{ lineHeight: 48, fontSize: 18, marginBottom: 10, color: '#E55880' }}>
+              style={{ fontWeight: 'bold', fontSize: 11, marginTop: 8, color: 'white' }}>
               {' '}Press and hold{' '}
             </Text>
-          </TouchableOpacity>
+          </View>
         </View>
       );
     }
