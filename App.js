@@ -125,7 +125,7 @@ export default class CameraExample extends React.Component {
         type: Camera.Constants.Type.front,
         status: 'scanning',
         message: 'Look at your camera',
-        messageStyle: 'statusViewSuccess'
+        messageStyle: 'statusViewDefault'
     };
 
     async componentWillMount() {
@@ -138,7 +138,7 @@ export default class CameraExample extends React.Component {
         if (path) {
             const data = new FormData();
             data.append('picture', { uri: path, name: 'isthistom.jpg', type:'image/jpg' });
-            console.log('data:', data);
+            // console.log('data:', data);
             const config = {
                 method: 'POST',
                 headers: {
@@ -147,10 +147,12 @@ export default class CameraExample extends React.Component {
                 },
                 body: data
             }
-            console.log('config:', config);
+            // console.log('config:', config);
             fetch(api, config)
                 .then((res) => {
+                    console.log('================================================');
                     console.log('res:', res);
+                    this._changeStatus(res);
                 })
                 .catch(err => {
                     console.log('err:', err);
@@ -159,6 +161,34 @@ export default class CameraExample extends React.Component {
             console.log('no image');
         }
     }
+    
+    _changeStatus = (res) => {
+      if (res === "tom") {
+        this.setState({ 
+          status: res,
+          message: 'Tom!',
+          messageStyle: 'statusViewSuccess'
+        });
+      } else if (res === 'nottom') {
+        this.setState({ 
+          status: res,
+          message: 'Not Tom!',
+          messageStyle: 'statusViewFail'
+        });
+      }
+      this.setTimeout( () => {
+        this._setTimePassed();
+      },6000);
+    }
+    
+    _setTimePassed() {
+      this.setState({
+        status: 'scanning',
+        message: 'Look at your camera',
+        messageStyle: 'statusViewDefault'
+      });
+   }
+   
 
     _takePictureAsync = async () => {
       let result =  await this.camera.takePictureAsync();
