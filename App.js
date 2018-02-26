@@ -161,16 +161,16 @@ export default class CameraExample extends React.Component {
             console.log('no image');
         }
     }
-    
+
     _changeStatus = (res) => {
       if (res === "tom") {
-        this.setState({ 
+        this.setState({
           status: res,
           message: 'Tom!',
           messageStyle: 'statusViewSuccess'
         });
       } else if (res === 'nottom') {
-        this.setState({ 
+        this.setState({
           status: res,
           message: 'Not Tom!',
           messageStyle: 'statusViewFail'
@@ -180,7 +180,7 @@ export default class CameraExample extends React.Component {
         this._setTimePassed();
       },3000);
     }
-    
+
     _setTimePassed() {
       this.setState({
         status: 'scanning',
@@ -188,7 +188,7 @@ export default class CameraExample extends React.Component {
         messageStyle: 'statusViewDefault'
       });
    }
-   
+
 
     _takePictureAsync = async () => {
       let result =  await this.camera.takePictureAsync();
@@ -216,8 +216,6 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.cameraView}>
                         <Camera ref={ref => { this.camera = ref; }} style={styles.camera} type={this.state.type} />
-                        { this.state.status === 'tom' && <Image style={styles.statusImage} source={require('./assets/checked.png')}/> }
-                        { this.state.status === 'nottom' && <Image style={styles.statusImage} source={require('./assets/cancel.png')}/> }
                         <View style={styles[this.state.messageStyle]}>
                             <Text style={styles.statusText}>{this.state.message}</Text>
                         </View>
