@@ -100,12 +100,13 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
     },
     buttonImage: {
+        width: 18,
         height: 24,
         top: '50%',
         left: '50%',
         transform: [
             {translateX : -9},
-            {translateY : -12}
+            {translateY : -13}
         ],
     },
     buttonText: {
@@ -222,7 +223,7 @@ export default class CameraExample extends React.Component {
                     </View>
                     <View style={styles.actionView}>
                         <TouchableOpacity style={styles.button} onPress={this._takePictureAsync}>
-                            <Image style={styles.buttonImage} source={require('./assets/lock.png')}/>
+                            <Image resizeMode='cover' style={styles.buttonImage} source={require('./assets/lock.png')}/>
                         </TouchableOpacity>
                         <Text style={styles.buttonText}>
                             Tap to unlock
