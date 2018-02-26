@@ -212,7 +212,7 @@ export default class CameraExample extends React.Component {
                 <View style={styles.mainView}>
                     <View style={styles.headerView}>
                         <Text style={styles.headerText}>
-                            Tom, Not Tom
+                            Anton
                         </Text>
                     </View>
                     <View style={styles.cameraView}>
